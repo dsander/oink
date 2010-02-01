@@ -48,7 +48,7 @@ module Oink
         end
       
         def self.instantiated_hash
-          @@instantiated
+          @@instantiated ||={}
         end
         
         def self.total_objects_instantiated
@@ -76,8 +76,8 @@ module Oink
     end
   
     def increment_ar_count
-      @@instantiated[self.class.base_class.name] ||= 0
-      @@instantiated[self.class.base_class.name] = @@instantiated[self.class.base_class.name] + 1  
+      self.class.instantiated_hash[self.class.base_class.name] ||= 0
+      self.class.instantiated_hash[self.class.base_class.name] += 1  
     end
 
   end
